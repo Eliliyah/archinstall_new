@@ -11,6 +11,7 @@ confirm() {
     done
 }
 
+#set the device hostname
 read -p "What is the hostname for this device?" host
 confirm "Is $host correct?"
 echo "$host">> /etc/hostname
@@ -52,3 +53,5 @@ useradd -m -G wheel -s /bin/bash $username
 passwd $username
 groupadd fuse
 usermod -a -G fuse $username
+cat /etc/passwd
+confirm "Was the user set correctly?"
