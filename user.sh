@@ -14,6 +14,8 @@ confirm() {
 read -p "What is the hostname for this device?" host
 confirm "Is $host correct?"
 echo "$host">> /etc/hostname
+cat /etc/hostname
+confirm "Was the hostname set correctly?"
 
     #Generate locales
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
