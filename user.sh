@@ -48,7 +48,7 @@ echo "
 
 #add yourself as a user
 read -p "What is your username going to be?" username
-confirm "Is "$username" correct?"
+confirm "Is ${username} correct?"
 useradd -m -G wheel -s /bin/bash "$username"
 passwd "$username"
 groupadd fuse
