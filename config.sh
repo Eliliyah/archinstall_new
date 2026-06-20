@@ -22,7 +22,7 @@ confirm "Did the time set correctly?"
 
 #Install a desktop environment
 pacman -S --needed plasma plasma-meta
-confirm "Did KDE Plasme install correctly?"
+confirm "Did KDE Plasma install correctly?"
 
 #Configure display manager
 pacman -S --needed plasma-login-manager --noconfirm
@@ -32,10 +32,6 @@ sudo systemctl enable plasmalogin
 pacman -S --needed networkmanager --noconfirm
 systemctl enable NetworkManager
 confirm "Did networkmanager install?"
-
-pacman -S --needed sddm --noconfirm
-systemctl enable sddm
-confirm "Did sddm install?"
 
 pacman -S --needed lm_sensors --noconfirm
 systemctl enable lm_sensors
