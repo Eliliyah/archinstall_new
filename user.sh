@@ -49,7 +49,7 @@ passwd
 
 echo "
 %wheel ALL=(ALL:ALL) ALL
-%wheel ALL=(ALL:ALL) NOPASSWD: ALL">> /etc/sudoers
+%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 #add yourself as a user
 read -p "What is your username going to be?" username
