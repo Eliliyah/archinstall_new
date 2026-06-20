@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#FUNCTIONS GO HERE
-
 confirm() {         
     while true; do
         read -p "${1}" yn
@@ -12,28 +10,25 @@ confirm() {
         esac
     done
 }
-example-function() {
-    echo "$2"
-}
 
 #Choose the drive for installation
 lsblk
-read -p "Which device will you be partitioning? Please specify the full device path." dev
-confirm "Is "$dev" correct?"
+read -p "Which device will you be partitioning? Please specify the full device path." dev_block
+confirm "Is "$dev_block" correct?"
 
-read -p "What will be the name of your first (boot) partition?" boot
-confirm "Is $boot" correct?
+read -p "What will be the name of your first (boot) partition?" bootpart
+confirm "Is $bootpart" correct?
 
-read -p "What will be the name of your second (swap) partition?" swap
-confirm "Is $swap" correct?
+read -p "What will be the name of your second (swap) partition?" swappy
+confirm "Is $swappy" correct?
 
-read -p "What will be the name of your third (root) partition?" root
-confirm "Is $root" correct?
+read -p "What will be the name of your third (root) partition?" rootpart
+confirm "Is $rootpart" correct?
 
 #Partition the drive 
-mkfs.fat -F 32 -n EFI $boot"
-mkswap -L swap -f "$swap"
-mkfs.btrfs "$root" --label=system -f
+mkfs.fat -F 32 -n EFI $bootpart"
+mkswap -L swap -f "$swappy"
+mkfs.btrfs "$rootpart" --label=system -f
 o=defaults,x-mount.mkdir
 o_btrfs=$o,defaults,noatime,compress=zstd,commit=120
 mount -t btrfs LABEL=system /mnt 
@@ -68,7 +63,7 @@ mount -t btrfs -o subvol=@tmp,$o_btrfs LABEL=system /mnt/var/tmp
 mount -t btrfs -o subvol=@cache,$o_btrfs LABEL=system /mnt/var/cache
 mkdir /mnt/boot
 mkdir /mnt/boot/efi
-mount "$boot" /mnt/boot
-swapon "$swap"
+mount "$bootpart" /mnt/boot
+swapon "$swappy"
 btrfs quota enable /mnt
 lsblk
