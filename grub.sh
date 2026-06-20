@@ -23,5 +23,5 @@ sed -i '5,6 s/^/#/' /etc/default/grub
 echo "GRUB_DISTRIBUTOR="EllieOS"
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3"
 GRUB_THEME="/usr/share/grub/themes/EllieOS/theme.txt"">> /etc/default/grub
-cp /archinstall_new/EllieOS /usr/share/grub/themes/
+cp -r /archinstall_new/EllieOS /usr/share/grub/themes/
 grub-mkconfig -o /boot/grub/grub.cfg
