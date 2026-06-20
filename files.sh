@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#FUNCTIONS GO HERE
-
 confirm() {         
     while true; do
         read -p "${1}" yn
@@ -12,32 +10,42 @@ confirm() {
         esac
     done
 }
-example-function() {
-    echo "Excellent. You haven't broken it. Yet."
-}
+
+#set username variable
+read -p "What did you name your user?" username
+confirm "Is "$username" correct?"
 
 #sync home files
 pacman -S --needed rsync starship fish --noconfirm
-cd /home/ellie/
-git clone https://github.com/eliliyah/surface
-cd /home/ellie/home/ellie/surface/
+cd /home/"$username"/
+pwd
+confirm "Are you in the correct directory?"
 
-mkdir /home/ellie/.config
-rsync -av /home/ellie/surface/files/.bash_aliases /home/ellie/.bash_aliases
-rsync -av /home/ellie/surface/files/bash_aliases /home/ellie/bash_aliases
-rsync -av /home/ellie/surface/files/bashrc /home/ellie/bashrc
-rsync -av /home/ellie/surface/files/fish_aliases /home/ellie/fish_aliases
-rsync -av /home/ellie/surface/files/update.sh /home/ellie/update.sh
-rsync -av /home/ellie/surface/files/starship.toml /home/ellie/.config/starship.toml
-mkdir /home/ellie/.config/fish/
-rsync -av /home/ellie/surface/files/config.fish /home/ellie/.config/fish/config.fish
-rsync -av /home/ellie/surface/files/fish_variables /home/ellie/.config/fish/fish_variables
-mkdir /home/ellie/.config/fish/conf.d/
-rsync -av /home/ellie/surface/files/uv.env.fish /home/ellie/.config/fish/conf.d/uv.env.fish
+git clone https://github.com/eliliyah/archinstall_new
+cd /home/"$username"/archinstall_new/
+pwd
+confirm "Are you in the correct directory?"
+
+rsync -av /home/"$username"/archinstall_new/files/.bash_aliases /home/"$username"/.bash_aliases
+rsync -av /home/"$username"/archinstall_new/files/bash_aliases /home/"$username"/bash_aliases
+rsync -av /home/"$username"/archinstall_new/files/bashrc /home/"$username"/bashrc
+rsync -av /home/"$username"/archinstall_new/files/fish_aliases /home/"$username"/fish_aliases
+rsync -av /home/"$username"/archinstall_new/files/update.sh /home/"$username"/update.sh
+
+mkdir /home/"$username"/.config
+rsync -av /home/"$username"/archinstall_new/files/starship.toml /home/"$username"/.config/starship.toml
+
+mkdir /home/"$username"/.config/fish/
+rsync -av /home/"$username"/archinstall_new/files/config.fish /home/"$username"/.config/fish/config.fish
+rsync -av /home/"$username"/archinstall_new/files/fish_variables /home/"$username"/.config/fish/fish_variables
+
+mkdir /home/"$username"/.config/fish/conf.d/
+rsync -av /home/"$username"/archinstall_new/files/uv.env.fish /home/"$username"/.config/fish/conf.d/uv.env.fish
+
 mkdir /home/llie/.local/
-mkdir /home/ellie/.local/bin
-rsync -av /home/ellie/surface/files/env.fish /home/ellie/.local/bin/env.fish
-mkdir /home/ellie/Pictures
-rsync -av /home/ellie/surface/files/arch_pink_background.png /home/ellie/Pictures/arch_pink_background.png
-rsync -av /home/ellie/surface/files/ellieossticker_small.png /home/ellie/Pictures/ellieossticker_small.png
-rsync -av /home/ellie/surface/files/home_files.zip/ /home/ellie/Downloads/home_files.zip
+mkdir /home/"$username"/.local/bin/
+rsync -av /home/"$username"/archinstall_new/files/env.fish /home/"$username"/.local/bin/env.fish
+
+mkdir /home/"$username"/Pictures
+rsync -av /home/"$username"/archinstall_new/files/arch_pink_background.png /home/"$username"/Pictures/arch_pink_background.png
+rsync -av /home/"$username"/archinstall_new/files/"$username"ossticker_small.png /home/"$username"/Pictures/"$username"ossticker_small.png
