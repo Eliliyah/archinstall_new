@@ -99,10 +99,6 @@ confirm "Did home files sync?"
 
 #set theme elements
 pacman -S --needed beautyline oxygen --noconfirm
-mkdir /home/ellie/.local/
-mkdir /home/ellie/.local/share/
-mkdir /home/ellie/.local/share/color-schemes/
-rsync -av /home/ellie/archinstall_new/files/HotPinkAnemone.colors /home/ellie/.local/share/color-schemes/HotPinkAnemone.colors
 
 #install flatpak packages
 for flat in brave discord feishin jellyfin; do
