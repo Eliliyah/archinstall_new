@@ -1,0 +1,15 @@
+[Unit]
+Description=rclone proton
+After=network.target
+
+[Service]
+ExecStartPre=/bin/sleep 10
+ExecStart=rclone  --vfs-cache-mode  writes mount proton: /home/ellie/proton
+User=ellie
+Type=notify
+Restart=always
+
+
+[Install]
+WantedBy=default.target
+RequiredBy=network.target

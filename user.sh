@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#FUNCTIONS GO HERE
+
 confirm() {         
     while true; do
         read -p "${1}" yn
@@ -10,14 +12,9 @@ confirm() {
         esac
     done
 }
-
-#set the device hostname
-read -p "What is the hostname for this device?" host
-confirm "Is "$host" correct?"
-echo "$host">> /etc/hostname
-cat /etc/hostname
-confirm "Was the hostname set correctly?"
-
+example-function() {
+    echo "Excellent. You haven't broken it. Yet."
+}
     #Generate locales
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
@@ -38,6 +35,14 @@ LC_NUMERIC=en_US.UTF-8
 LANGUAGE=en_US.UTF-8">> /etc/locale.conf
 echo "KEYMAP=us
 FONT=Lat2-Terminus16">> /etc/vconsole.conf
+#echo "ballerina">> /etc/hostname
+
+#set the device hostname
+read -p "What is the hostname for this device?" host
+confirm "Is "$host" correct?"
+echo "$host">> /etc/hostname
+cat /etc/hostname
+confirm "Was the hostname set correctly?"
 
 #Set the root password
 passwd
@@ -48,10 +53,16 @@ echo "
 
 #add yourself as a user
 read -p "What is your username going to be?" username
-confirm "Is ${username} correct?"
-useradd -m -G wheel -s /bin/bash "$username"
-passwd "$username"
+confirm "Is "$username" correct?"
+useradd -m -G wheel -s /bin/bash/ “$username”
+passwd “$username”
 groupadd fuse
-usermod -a -G fuse "$username"
-cat /etc/passwd
-confirm "Was the user set correctly?"
+usermod -a -G fuse “$username”    
+cut -d: -f1 /etc/passwd
+confirm "Was the user set correctly?
+
+#add yourself as a user
+#useradd -m -G wheel -s /bin/bash ellie
+#passwd ellie
+#groupadd fuse
+#usermod -a -G fuse ellie
