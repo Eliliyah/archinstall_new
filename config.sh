@@ -5,13 +5,10 @@ confirm() {
         read -p "${1}" yn
         case $yn in
             [Yy]* ) $2; break;;
-            [Nn]* ) echo "aborted"; exit;;
-            * ) echo "Please answer yes or no.";;
+            [Nn]* ) exit;;
+            * ) echo "Please answer Y or N.";;
         esac
     done
-}
-example-function() {
-    echo "Excellent. You haven't broken it. Yet."
 }
 
 #set time
@@ -24,8 +21,12 @@ locale-gen
 confirm "Did the time set correctly?"
 
 #Install a desktop environment
-pacman -S --needed cinnamon xorg wayland
-confirm "Did cinnamon install correctly?"
+pacman -S --needed plasma plasma-meta
+confirm "Did KDE Plasme install correctly?"
+
+#Configure display manager
+pacman -S --needed plasma-login-manager --noconfirm
+sudo systemctl enable plasmalogin
 
 #install system services
 pacman -S --needed networkmanager --noconfirm
@@ -65,20 +66,14 @@ pacman -S aura --noconfirm
 aura - A beautyline
 confirm "Did aura install?"
 
-for pkg in xf86-input-wacom zellij yazi yay rsync vim konsole fish iwd aura starship vscodium btop dolphin strawberry libreoffice-fresh ttf-daddytime-mono-nerd kde-style-oxygen-qt6 snapper; do
+for pkg in pamac zellij yazi yay rsync vim konsole fish iwd aura starship vscodium btop dolphin strawberry libreoffice-fresh ttf-daddytime-mono-nerd kde-style-oxygen-qt6 snapper; do
   pacman -S --needed --noconfirm "$pkg"
 done
 
 #Install AUR packages
-for pkg in oxygen-cursors-extra hunspell-en-med-glut-git debtap masterpdfeditor-free appimagelauncher hunspell-en-med-glut-git libreoffice-extension-cleandoc ocs-url onevpl-intel-gpu pacdiff-pacman-hook-git wd719x-firmware aic94xx-firmware snap-pac-grub; do
-  aura -A --noconfirm "$pkg"
-done
-
-#Install pamac
-for pkg in pamac-aur libpamac-aur archlinux-appstream-data-pamac; do
- aura -A "$pkg"
-
-confirm "Did everything install?"
+#for pkg in oxygen-cursors-extra hunspell-en-med-glut-git debtap masterpdfeditor-free appimagelauncher hunspell-en-med-glut-git libreoffice-extension-cleandoc ocs-url onevpl-intel-gpu pacdiff-pacman-hook-git wd719x-firmware aic94xx-firmware snap-pac-grub; do
+#  aura -A --noconfirm "$pkg"
+#done
 
 #Configure journal
 echo "Storage=persistent" >> /etc/systemd/journald.conf
@@ -99,14 +94,7 @@ pacman -S --needed rclone rsync --noconfirm
 
 #Configure zram
 pacman -S zram-generator --noconfirm
-rsync -av /surface/zram-generator.conf /etc/systemd/zram-generator.conf
-
-#Configure sddm
-aura -A archlinux-themes-sddm --noconfirm
-echo "[Theme]
-Current=archlinux-simplyblack">> /etc/sddm.conf
-cat /etc/sddm.conf
-confirm "All good?"
+rsync -av /archinstall_new/zram-generator.conf /etc/systemd/zram-generator.conf
 
 #sync files
 chmod +x files.sh
@@ -115,9 +103,10 @@ confirm "Did home files sync?"
 
 #set theme elements
 pacman -S --needed beautyline oxygen --noconfirm
+mkdir /home/ellie/.local/
 mkdir /home/ellie/.local/share/
 mkdir /home/ellie/.local/share/color-schemes/
-rsync -av /home/ellie/surface/files/HotPinkAnemone.colors /home/ellie/.local/share/color-schemes/HotPinkAnemone.colors
+rsync -av /home/ellie/archinstall_new/files/HotPinkAnemone.colors /home/ellie/.local/share/color-schemes/HotPinkAnemone.colors
 
 #install flatpak packages
 for flat in brave discord feishin jellyfin; do
@@ -125,7 +114,7 @@ for flat in brave discord feishin jellyfin; do
 done
 
 #Generate the initramfs
-for kerns in linux linux-lts linux-surface; do
+for kerns in linux linux-lts; do
   mkinitcpio -p "$kerns"
 done
 confirm "Did the initramfs generate successfully?"
