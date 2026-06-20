@@ -11,9 +11,13 @@ confirm() {
     done
 }
 
+chmod +x locales.sh
+./locales.sh
+confirm "Were the locales set successfully?"
+
 chmod +x user.sh
 ./user.sh
-confirm "Were the locales set and user created successfully?"
+confirm "Was the hostname set and user created successfully?"
 
 pacman-key --init
 pacman-key --update
