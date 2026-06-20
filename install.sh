@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#FUNCTIONS GO HERE
-
 confirm() {         
     while true; do
         read -p "${1}" yn
@@ -11,9 +9,6 @@ confirm() {
             * ) echo "Please answer Y or N.";;
         esac
     done
-}
-example-function() {
-    echo "$2"
 }
 
 confirm "Are you ready to begin?"
