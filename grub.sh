@@ -12,9 +12,6 @@ confirm() {
         esac
     done
 }
-example-function() {
-    echo "Excellent. You haven't broken it. Yet."
-}
 
 #Install bootloader
 pacman -S grub grub-btrfs efibootmgr efivar efitools --noconfirm
