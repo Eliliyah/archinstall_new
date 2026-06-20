@@ -14,16 +14,16 @@ confirm() {
 #Choose the drive for installation
 lsblk
 read -p "Which device will you be partitioning? Please specify the full device path." dev_block
-confirm "Is "$dev_block" correct?"
+confirm "Is $dev_block correct?"
 
 read -p "What will be the name of your first (boot) partition?" bootpart
-confirm "Is $bootpart" correct?
+confirm "Is $bootpart correct?
 
 read -p "What will be the name of your second (swap) partition?" swappy
-confirm "Is $swappy" correct?
+confirm "Is $swappy correct?"
 
 read -p "What will be the name of your third (root) partition?" rootpart
-confirm "Is $rootpart" correct?
+confirm "Is $rootpart correct?"
 
 #Partition the drive 
 mkfs.fat -F 32 -n EFI $bootpart"
@@ -49,7 +49,6 @@ rm -rf /mnt/log
 rm -rf /mnt/tmp
 rm -rf /mnt/cache
 umount -R /mnt
-
 
 #Mount the partitions
 o=defaults,x-mount.mkdir
