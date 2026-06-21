@@ -32,6 +32,10 @@ confirm "Did the keyrings install and mirrors update successfully?"
 pacman -S --needed - < pkglist.txt
 confirm "Did all packages install successfully?"
 
+chmod +x de.sh
+./de.sh
+confirm "Was a desktop enviornment installed?"
+
 chmod +x config.sh
 ./config.sh
 confirm "Was the system configured successfully?"
