@@ -61,7 +61,6 @@ grub-btrfs
 gthumb
 gurk
 intel-ucode
-iptsd
 iwd
 konsole
 krita
