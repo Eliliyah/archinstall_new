@@ -28,12 +28,13 @@ chmod +x keyrings.sh
 ./keyrings.sh
 confirm "Did the keyrings install and mirrors update successfully?"
 
-#chmod +x packages.sh
+#install packages
 for pkg in $(cat pkglist.txt | tr '\n' ' ' ) ; do
     pacman --needed -S "$pkg" --noconfirm
 done
 confirm "Did all packages install successfully?"
 
+#install a desktop enviornment
 chmod +x de.sh
 ./de.sh
 confirm "Was a desktop enviornment installed?"
