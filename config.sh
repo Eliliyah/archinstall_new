@@ -20,14 +20,6 @@ timedatectl status
 locale-gen
 confirm "Did the time set correctly?"
 
-#Install a desktop environment
-pacman -S --needed plasma plasma-meta
-confirm "Did KDE Plasma install correctly?"
-
-#Configure display manager
-pacman -S --needed plasma-login-manager --noconfirm
-sudo systemctl enable plasmalogin
-
 #install system services
 pacman -S --needed networkmanager --noconfirm
 systemctl enable NetworkManager
